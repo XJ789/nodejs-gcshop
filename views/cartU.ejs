@@ -1,0 +1,28 @@
+<div class="container">	
+    <h2>cart 테이블 수정</h2>
+    <form action="/cartupdate_process" method="post">
+        <input type="hidden" name="cart_id" value="<%= cart.cart_id %>" />
+        <div class="mb-3">
+            <label class="form-label" for="id">고객</label> 
+            <select name="loginid" id="id">
+                <% persons.forEach(function(p) { %>
+                    <option value="<%= p.loginid %>" <%= cart.loginid === p.loginid ? 'selected' : '' %>><%= p.name %> (<%= p.loginid %>)</option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="id2">상품</label> 
+            <select name="prod_id" id="id2">
+                <% products.forEach(function(pr) { %>
+                    <option value="<%= pr.prod_id %>" <%= cart.prod_id === pr.prod_id ? 'selected' : '' %>><%= pr.name %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">날짜</label> 
+            <input class="form-control" type="text" name="start" value="<%= cart.date %>" readonly style="width:300px; background-color:rgb(204, 203, 203);"/>
+        </div>
+        <button class="btn btn-outline-primary btn-sm" type="submit">수정</button>
+        <a href="/cartView"><button class="btn btn-outline-primary btn-sm" type="button">카트 목록 돌아가기</button></a>
+    </form>
+</div>

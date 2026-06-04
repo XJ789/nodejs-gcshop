@@ -1,0 +1,81 @@
+<div class="container">	
+    <script>
+
+        function displayFileName(){
+            var fileName = $("#file").val();
+            $(".upload-name").val(fileName);
+        }
+    </script>
+	
+
+        
+    <h2>상품 입력</h2>
+	<form action="/product/<%= isUpdate ? 'update_process' : 'create_process' %>" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+        
+        <% if(isUpdate) { %>
+            <input type="hidden" name="prodid" value="<%= product.prod_id %>">
+            <input type="hidden" name="image" value="<%= product.image %>">
+        <% } %>
+
+        <div class="mb-3">
+            <label class="form-label" for="id_main" style="display: inline-block; margin-right: 10px;">카테고리 </label> 
+            <select name="category" id="id_main" style="width:150px; padding: 3px;">
+                <% codes.forEach(function(code) { %>
+                    <option value="<%= code.main_id %>_<%= code.sub_id %>" <%= isUpdate && (product.main_id == code.main_id && product.sub_id === code.sub_id) ? 'selected' : '' %>><%= code.main_name %> : <%= code.sub_name %></option>
+                <% }); %>
+              </select>
+        </div>
+
+        <table>
+        <tr>
+            <td>
+                <div class="mb-3">
+                    <label class="form-label" for="id">제품명</label> 
+                    <input class="form-control" type="text" name="name" value="<%= isUpdate ? product.name : '' %>" style="width:300px;" />
+                </div>
+            </td>
+            <td width="30px"></td>
+            <td>
+                <div class="mb-3">
+                    <label class="form-label" for="id">가격</label> 
+                    <input class="form-control" type="text" name="price" value="<%= isUpdate ? product.price : '' %>" style="width:300px;" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mb-3">
+                    <label class="form-label" for="id">재고</label> 
+                    <input class="form-control" type="text" name="stock" value="<%= isUpdate ? product.stock : '' %>" style="width:300px;" />
+                </div>
+            </td>
+            <td width="30px"></td>
+            <td>
+                <div class="mb-3">
+                    <label class="form-label" for="id">브랜드</label> 
+                    <input class="form-control" type="text" name="brand" value="<%= isUpdate ? product.brand : '' %>" style="width:300px;" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mb-3">
+                    <label class="form-label" for="id">공급자</label> 
+                    <input class="form-control" type="text" name="supplier" value="<%= isUpdate ? product.supplier : '' %>" style="width:300px;" />
+                </div>
+            </td>
+            <td width="30px"></td>
+            <td></td>
+        </tr>
+        </table>
+        
+        <div class="mb-3">
+            <input class="upload-name" value="<%= isUpdate ? product.image : '' %>" placeholder="이미지파일" readonly>
+            <input type="file" id="file" name="uploadFile" onchange="displayFileName()">
+        </div>
+        
+        <button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+        <a href="/product/view"><button class="btn btn-outline-primary btn-sm" type="button">제품목록 돌아가기</button></a>
+    </form>
+        
+</div>

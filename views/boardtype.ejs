@@ -1,0 +1,42 @@
+<table class="table table-bordered border-primary table-hover" style="text-align: center;">
+    <thead class="table-primary">
+        <tr>
+            <th>제목</th>
+            <th>페이지당 글 수</th>
+            <th>설명</th>
+            <th>일반 사용자 쓰기</th>
+            <th>댓글</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead> 
+    
+    <tbody>
+        <% boardtypes.forEach(function(type) { %>
+        <tr>
+            <td><%= type.title %></td>
+            <td><%= type.numPerPage %></td>
+            <td><%= type.description %></td>
+            <td><%= type.write_YN === 'Y' ? 'Y' : 'N' %></td>
+            <td><%= type.re_YN === 'Y' ? 'Y' : 'N' %></td>
+            <td>
+                <a href="/board/type/update/<%= type.type_id %>" style="text-decoration: none;">수정</a>
+            </td>
+            <td>
+                <a href="/board/type/delete/<%= type.type_id %>" 
+                    onclick="return confirm('정말로 삭제하시겠습니까?')" 
+                    style="text-decoration: none;">삭제</a>
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<% if (boardtypes.length === 0) { %>
+    <p style="margin-top: 10px; font-size: 14px;">자료가 없으니 게시판 종류 추가 버튼으로 게시판 종류를 추가해 주십시오.</p>
+<% } %>
+
+<% if (cls === 'MNG') { %>
+    <a href="/board/type/create">
+        <button class="btn btn-outline-secondary btn-sm" type="button">게시판 종류 추가</button>
+    </a>
+<% } %>

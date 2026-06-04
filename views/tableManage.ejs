@@ -1,0 +1,22 @@
+<div class="container">
+    <table class="table table-bordered border-primary table-hover" style="text-align: center; vertical-align: middle;">
+        <thead class="table-primary">
+            <tr>
+                <th style="width: 30%;">테이블 명</th>
+                <th>테이블 설명</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% tables.forEach(function(table) { %>
+                <tr>
+                    <td>
+                        <a href="/table/view/<%= table.table_name %>" style="text-decoration: none;">
+                            <%= table.table_name %>
+                        </a>
+                    </td>
+                    <td><%= table.table_comment %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

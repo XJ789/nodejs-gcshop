@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table table-bordered border-primary table-hover" style="text-align: center; vertical-align: middle;">
+        <thead class="table-primary">
+            <tr>
+                <th>loginid</th><th>고객명</th><th>상품 id</th><th>상품명</th><th>일자</th><th colspan="2"></th>
+            </tr>
+        </thead> 
+        <tbody>
+            <% if (carts && carts.length > 0) { %>
+                <% carts.forEach(function(item) { %>
+                <tr>
+                    <td><%= item.loginid %></td>
+                    <td><%= item.user_name %></td>
+                    <td><%= item.prod_id %></td>
+                    <td><%= item.prod_name %></td>
+                    <td style="font-size: 0.9em;"><%= item.date %></td>
+                    <td><a href="/cartupdate/<%= item.cart_id %>" style="text-decoration: none;">수정</a></td>
+                    <td><a href="/cartdelete/<%= item.cart_id %>" style="text-decoration: none;" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+                </tr>
+                <% }); %>
+            <% } %>
+            <% if (!carts || carts.length === 0) { %>
+                <tr><td colspan="7" style="padding: 20px;">장바구니에 담긴 상품이 없습니다.</td></tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
